@@ -19,7 +19,16 @@ mongoose.connect('mongodb://127.0.0.1:27017/authentication')
 
 
 //Global error handler
+app.use((err, req, res, next) => {
+  err.statusCode = err.statusCode || 500
+  err.status = err.status || 'error';
+  res.status(err.statusCode).json({
+    status: err.status,
+    msg: err.message,
 
+  })
+
+})
 
 
 
